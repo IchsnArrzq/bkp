@@ -18,6 +18,9 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('login_v1/css/util.cs') }}s">
 <link rel="stylesheet" type="text/css" href="{{ asset('login_v1/css/main.cs') }}s">
 <!--===============================================================================================-->
+@error('username')
+asd
+@enderror
 
 <div class="limiter">
     <div class="container-login100">

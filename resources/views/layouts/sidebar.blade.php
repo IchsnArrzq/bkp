@@ -35,12 +35,19 @@
                                 <p>Rapot Nilai</p>
                             </a>
                         </li>
+
+                        <li class="nav-item{{ request()->is('menu/siswa/tugasBK') ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('menu.siswa.tugasBK') }}">
+                                <i class="nc-icon nc-icon nc-paper-2"></i>
+                                <p>Belum Kompeten</p>
+                            </a>
+                        </li>
                         @elseif(Auth::user()->role == 'guru')
 
                         <li class="nav-item{{ request()->is('menu/guru/tugasBK') ? ' active' : '' }}">
                             <a class="nav-link" href="{{ route('menu.guru.tugasBK') }}">
                                 <i class="nc-icon nc-bell-55"></i>
-                                <p>Tugas BK</p>
+                                <p>Belum Kompoten</p>
                             </a>
                         </li>
                         <li class="nav-item{{ request()->is('menu/guru/rewardPunishment') ? ' active' : '' }}">
@@ -88,7 +95,7 @@
                         <li class="nav-item active active-pro">
                             <a class="nav-link active" href="javascript:;">
                                 <i class="nc-icon nc-alien-33"></i>
-                                <p>Upgrade plan</p>
+                                <p>{{ auth()->user()->role }}</p>
                             </a>
                         </li>
                     </ul>

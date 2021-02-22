@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\{Tipe,Kode,Skor};
+use App\Tipe;
 class SikapSeeder extends Seeder
 {
     /**
@@ -14,13 +14,8 @@ class SikapSeeder extends Seeder
         Tipe::create([
             'tipe' => 'Reward'
         ]);
-        Kode::create([
-            'tipe_id' => 1,
-            'kode' => 'H1.1'
-        ]);
-        Skor::create([
-            'kode_id' => 1,
-            'skor' => 70
+        Tipe::create([
+            'tipe' => 'Punishment'
         ]);
     }
 }

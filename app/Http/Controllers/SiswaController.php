@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Rapot, Siswa, Sholat, Sikap};
+use App\{Rapot, Siswa, Sholat, Sikap, Tugas};
 use File;
+
 class SiswaController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
         return view('admin.siswa.index', [
-            'siswa' => Siswa::all()
+            'siswa' => Siswa::paginate(5)
         ]);
     }
 
@@ -86,11 +87,11 @@ class SiswaController extends Controller
             'telepon'  => 'required'
         ]);
         if (isset($request->foto)) {
-            $extensi = ['image/png', 'image/jpg','image/jpeg'];
+            $extensi = ['image/png', 'image/jpg', 'image/jpeg'];
             $file = $request->file('foto');
             if (in_array($file->getMimeType(), $extensi)) {
                 $siswa = Siswa::find($request->nis);
-                File::delete('fotoSiswa/'.$siswa->foto);
+                File::delete('fotoSiswa/' . $siswa->foto);
                 Siswa::where('id', $id)->update([
                     'nis' => $request->nis,
                     'nama' => $request->nama,
@@ -98,10 +99,10 @@ class SiswaController extends Controller
                     'rayon' => $request->rayon,
                     'alamat' => $request->alamat,
                     'telepon'  => $request->telepon,
-                    'foto' => $request->nis.'_'.$file->getClientOriginalName()
+                    'foto' => $request->nis . '_' . $file->getClientOriginalName()
                 ]);
-                $file->move('fotoSiswa',$request->nis.'_'.$file->getClientOriginalName());
-                return back()->with('success','Berhasil Update Siswa Dan Menambahkan foto');
+                $file->move('fotoSiswa', $request->nis . '_' . $file->getClientOriginalName());
+                return back()->with('success', 'Berhasil Update Siswa Dan Menambahkan foto');
             } else {
                 return back()->with('failed', 'Extensi File Tidak Sesuai');
             }
@@ -155,6 +156,13 @@ class SiswaController extends Controller
     {
         return view('siswa.profil', [
             'siswa' => Siswa::find(auth()->user()->id)
+        ]);
+    }
+    public function tugasBK()
+    {
+        return view('siswa.tugasBK', [
+            'rapot' => Rapot::where('user_id', auth()->user()->id)->where('nilai', '<=', 75)->get(),
+            'tugas' => Tugas::paginate(5)
         ]);
     }
 }

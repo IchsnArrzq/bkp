@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kode extends Model
 {
+    protected $fillable = ['tipe_id','kode'];
     public function tipe()
     {
         return $this->belongsTo(Tipe::class);

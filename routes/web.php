@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\SiswaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +25,8 @@ Route::prefix('/menu')->name('menu.')->group(function(){
         Route::get('user/create','UserController@create')->name('user.create');
         Route::post('user/store','UserController@store')->name('user.store');
         Route::resource('rewardPunishment','RewardPunishmentController');
+        Route::resource('kode','KodeController');
+        Route::resource('skor','SkorController');
     });
     Route::prefix('/guru')->name('guru.')->middleware('auth')->group(function(){
         Route::get('/profil','GuruController@profil')->name('profil');
@@ -48,6 +50,7 @@ Route::prefix('/menu')->name('menu.')->group(function(){
         Route::get('/rewardPunishment','SiswaController@rewardPunishment')->name('rewardPunishment');
         Route::get('/rapot','SiswaController@rapot')->name('rapot');
         Route::get('/profil','SiswaController@profil')->name('profil');
+        Route::get('/tugasBK','SiswaController@tugasBK')->name('tugasBK');
     });
 });
 

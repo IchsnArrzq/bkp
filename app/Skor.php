@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skor extends Model
 {
+    protected $fillable = ['kode_id','skor'];
     public function kode()
     {
         return $this->belongsTo(Kode::class);
